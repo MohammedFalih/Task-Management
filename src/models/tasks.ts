@@ -8,7 +8,7 @@ interface TaskProps {
     completed: boolean
 }
 
-export default class Task {
+class Task {
     id: string;
     title: string;
     description: string;
@@ -68,3 +68,5 @@ export default class Task {
         }
     }
 }
+
+export default Task;
