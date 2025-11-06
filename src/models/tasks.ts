@@ -29,7 +29,8 @@ class Task {
     }
 
     static read(id: string): Task {
-        const allTasks = require('./data.json');
+        const rawData = fs.readFileSync('./data.json');
+        const allTasks = JSON.parse(rawData.toString());
         const task = allTasks.find((t: { id: string; }) => t.id === id);
         
         if(task) {
@@ -41,7 +42,7 @@ class Task {
     }
 
     static update(id: string, title: string, description: string, completed: boolean) {
-        const tasks = require('./data.json');
+        const tasks = require('data.json');
         const index = tasks.findIndex((t: {id: string}) => t.id === id);
 
         if(index !== -1) {
@@ -49,7 +50,7 @@ class Task {
             tasks[index].description = description;
             tasks[index].completed = completed;
 
-            fs.writeFileSync('./data.json', JSON.stringify(tasks));
+            fs.writeFileSync('data.json', JSON.stringify(tasks));
             return new Task(tasks[index]);
         }
 
@@ -59,12 +60,12 @@ class Task {
     }
 
     static delete(id: string) {
-        const tasks = require('./data.json');
+        const tasks = require('data.json');
         const index = tasks.findIndex((t: {id: string}) => t.id === id);
 
         if(index !== -1) {
             tasks.splice(index, 1);
-            fs.writeFileSync('./data.json', JSON.stringify(tasks))
+            fs.writeFileSync('data.json', JSON.stringify(tasks))
         }
     }
 }

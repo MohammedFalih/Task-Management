@@ -3,7 +3,7 @@ import Task from '../models/tasks';
 
 export const getAllTasks = async (req: express.Request, res:express.Response) => {
     try {
-        const tasks = await require('../models/data.json');
+        const tasks = await require('../data.json');
         res.status(200).json(tasks);
     } catch (error) {
         res.status(400).send('Oops..Error in fetching Tasks.');
